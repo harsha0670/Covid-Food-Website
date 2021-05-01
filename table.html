@@ -125,6 +125,7 @@ function gotData(data){
   var info=data.val();
   let keys=Object.keys(info);
   arr = Object.values(info);
+  table(arr)
   $('th').on('click',function(){
     var column=$(this).data('column')
     var order=$(this).data('order')
@@ -143,12 +144,13 @@ function gotData(data){
     }
     $(this).html(text)
     table(arr)
-    $('#search-input').on('keyup',function(){
+    
+  })
+  $('#search-input').on('keyup',function(){
       var value=$(this).val()
       console.log('Value :',value)
       var data=searchTable(value,arr)
       table(data)
-    })
   })
 }
 

@@ -60,16 +60,16 @@
       <div class="table-responsive" style="overflow-y: auto;">
         <table class="table table-striped" style="width: 100%;">
             <tr class="bg-info">
-              <th data-column="cname" data-order="desc">Caterer Name &#9660</th>
-              <th data-column="name" data-order="desc">Contact Name &#9660</th>
-              <th data-column="pno">Phone Number</th>
-              <th data-column="spno">Secondary Contact No</th>
-              <th data-column="location" data-order="desc">Servicable location &#9660</th>
-              <th data-column="price" data-order="desc">Cost &#9660</th>
-              <th data-column="noofmeals">No of Meals</th>
-              <th data-column="frequency">Frequency of Meals</th>
-              <th data-column="deliveryinfo">Delivery Info</th>
-              <th data-column="typefood">Type of Food</th>
+              <th data-column="caterer_name" data-order="desc">Caterer Name &#9660</th>
+              <th data-column="contact_name" data-order="desc">Contact Name &#9660</th>
+              <th data-column="phone_number">Phone Number</th>
+              <th data-column="secondary_number">Secondary Contact No</th>
+              <th data-column="servicable_location" data-order="desc">Servicable location &#9660</th>
+              <th data-column="cost" data-order="desc">Cost &#9660</th>
+              <th data-column="no_of_meals">No of Meals</th>
+              <th data-column="frequency_of_meals">Frequency of Meals</th>
+              <th data-column="delivery_info">Delivery Info</th>
+              <th data-column="type_of_food">Type of Food</th>
               <th data-column="remarks">Remarks</th>
             </tr>
             <tbody id="myTable">
@@ -119,6 +119,7 @@
         var column=$(this).data('column')
         var order=$(this).data('order')
         var text=$(this).html()
+        console.log("Column was clicked!",column,order)
     
         if(order=='desc'){
           text=text.substring(0, text.length-1)
@@ -165,31 +166,31 @@
     
       for(let i=0;i<arr.length;i++){
     
-        let cname=arr[i].caterer_name;
-        let name=arr[i].contact_name;
+        let caterer_name=arr[i].caterer_name;
+        let contact_name=arr[i].contact_name;
         let cost=arr[i].cost;
-        let deliveryinfo=arr[i].delivery_info
-        let frequencyofmeals=arr[i].frequency_of_meals
-        let noofmeals=arr[i].no_of_meals
-        let pno=arr[i].phone_number
+        let delivery_info=arr[i].delivery_info
+        let frequency_of_meals=arr[i].frequency_of_meals
+        let no_of_meals=arr[i].no_of_meals
+        let phone_number=arr[i].phone_number
         let remarks=arr[i].remarks
-        let location=arr[i].servicable_location
-        let typeoffood=arr[i].type_of_food
-        let sno=arr[i].secondary_number
+        let servicable_location=arr[i].servicable_location
+        let type_of_food=arr[i].type_of_food
+        let secondary_number=arr[i].secondary_number
       
         // let infoResults=document.querySelector(".infoResults");
     
         var row=`<tr>
-                    <td>${cname}</td>
-                    <td>${name}</td>
-                    <td>${pno}</td>
-                    <td>${sno}</td>
-                    <td>${location}</td>
+                    <td>${caterer_name}</td>
+                    <td>${contact_name}</td>
+                    <td>${phone_number}</td>
+                    <td>${secondary_number}</td>
+                    <td>${servicable_location}</td>
                     <td>${cost}</td>
-                    <td>${noofmeals}</td>
-                    <td>${frequencyofmeals}</td>
-                    <td>${deliveryinfo}</td>
-                    <td>${typeoffood}</td>
+                    <td>${no_of_meals}</td>
+                    <td>${frequency_of_meals}</td>
+                    <td>${delivery_info}</td>
+                    <td>${type_of_food}</td>
                     <td>${remarks}</td>
                  </tr>`
         table.innerHTML += row

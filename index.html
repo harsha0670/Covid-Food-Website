@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <title>Caterers @ Bengaluru</title>
 </head>
-<body style="overflow: hidden;">
+<body>
   <header class="cd-main-header js-cd-main-header" style="background-color: rgb(11, 88, 88);">
     <div class="cd-logo-wrapper">
       <a class="cd-logo" style="color: white; font-weight: bold; font-size: 20px; margin-top: 5px; text-decoration: none; margin-left: 10px;"><p>Caterers Bengaluru</p></a>
@@ -58,7 +58,7 @@
           </div>
       <br>
       <div class="table-responsive" style="overflow-y: auto;">
-        <table class="table table-striped" style="width: 100%;">
+        <table id="caterer_table" class="table table-striped" style="width: 100%;">
             <tr class="bg-info">
               <th data-column="caterer_name" data-order="desc">Caterer Name &#9660</th>
               <th data-column="contact_name" data-order="desc">Contact Name &#9660</th>
@@ -197,6 +197,11 @@
       }
     
     }
+
+    // $(document).ready(function () {
+    // $('#caterer_table').DataTable();
+    // $('.dataTables_length').addClass('bs-select');
+    // });
     </script>
   
   

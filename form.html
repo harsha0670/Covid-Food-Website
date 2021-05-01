@@ -7,29 +7,396 @@
     <title>Email Template</title>
   </head>
   <body>
-    <h1>Contact us</h1>
-    <p>Send a message and we will get back to you within 24 hours.</p>
-    <form class="contact-form">
-      <label for="">Caterer Name</label><br />
-      <input class="cname" type="text" placeholder="Caterer Name" /><br />
-      <label for="">Name </label><br />
-      <input class="name" type="text" placeholder="Person of Contact" /><br />
-      <label for="">Phone Number</label><br />
-      <input class="phno" type="text" placeholder="whatsapp contact"/><br />
-      <label for="">Message</label><br />
-      <textarea
-        class="message"
-        name=""
-        id=""
-        cols="30"
-        rows="10"
-        placeholder="message">
-        </textarea><br />
-      <button type="submit">Submit</button>
-    </form>
+    <div class="toaster"></div>
 
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
-    <script src="app.js"></script>
+<main class="wrapper">
+  <section class="section-form">
+    <h1>Contact Us</h1>
+    <p>
+      We will get back to you within 24hrs<br>
+    </p>
+
+    <form target="_blank" action="https://formsubmit.co/prajwal.jm25@gmail.com" method="POST" name="register" class="form" novalidate>
+      <div class="form-group">
+        <label for="name" class="form-label form-label--required">
+          Name:
+        </label>
+
+        <div class="form-addon" data-states-for="name">
+          <div class="form-addon__addon">
+            <span class="icon-name"></span>
+          </div>
+
+          <input type="text" id="name" name="name" class="form-input" placeholder="Contact Name" required>
+
+          <span class="form-addon__icon icon-valid"></span>
+          <span class="form-addon__icon icon-invalid"></span>
+        </div>
+
+        <div data-errors-for="name">
+          <small class="form-error" data-errors-when="valueMissing">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label form-label--required">
+          Email:
+        </label>
+
+        <div class="form-addon" data-states-for="email">
+          <div class="form-addon__addon">
+            <span class="icon-email"></span>
+          </div>
+
+          <input type="email" id="email" name="email" class="form-input" placeholder="example@gmail.com" required>
+
+          <span class="form-addon__icon icon-valid"></span>
+          <span class="form-addon__icon icon-invalid"></span>
+        </div>
+
+        <div data-errors-for="email">
+          <small class="form-error" data-errors-when="valueMissing">
+            This field is required.
+          </small>
+
+          <small class="form-error" data-errors-when="typeMismatch">
+            Please enter a valid email address.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="form-label form-label--required">
+          Phone number:
+        </label>
+
+        <div class="form-addon" data-states-for="phone">
+          <div class="form-addon__addon">
+            <span class="icon-phone"></span>
+          </div>
+
+          <input type="text" id="phone" name="phone" class="form-input" placeholder="12345 12345" pattern="[0-9]{5} [0-9]{5}" required>
+
+          <span class="form-addon__icon icon-valid"></span>
+          <span class="form-addon__icon icon-invalid"></span>
+        </div>
+
+        <div data-errors-for="phone">
+          <small class="form-error" data-errors-when="patternMismatch">
+            Please enter a valid phone number.
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message" class="form-label">
+          Message:
+        </label>
+        <div class="form-addon" data-states-for="phone">
+          <div class="form-addon__addon">
+            <span class="icon-phone"></span>
+          </div>
+        <input type="text" id="message" name="message" class="form-area" placeholder="Message">
+      </div>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="button">Sign up</button>
+      </div>
+    </form>
+  </section>
+</main>
+<script>
+  const toaster = document.getElementsByClassName("toaster")[0];
+const form = document.querySelector("form");
+
+GentleForm(form, function (event) {
+  event.preventDefault();
+
+  if (this.isValid()) addToast("success", "Yay, the form is valid!");
+  else addToast("error", "Oops, the form is invalid.");
+});
+
+function addToast(type, message) {
+  const toast = document.createElement("div");
+
+  toast.classList.add("toast");
+  toast.classList.add("toast--" + type);
+  toast.innerHTML = message;
+
+  toaster.appendChild(toast);
+
+  toast.addEventListener(
+    "transitionend",
+    function (event) {
+      if (event.propertyName !== "transform") return;
+
+      if (toast.classList.contains("toast--show")) {
+        setTimeout(function () {
+          toast.classList.remove("toast--show");
+        }, 3000);
+      } else {
+        toaster.removeChild(toast);
+      }
+    },
+    false
+  );
+
+  setTimeout(() => toast.classList.add("toast--show"), 100);
+}
+
+</script>
+<style>
+  /*---------------------------------------------*\
+    variables
+\*---------------------------------------------*/
+/*---------------------------------------------*\
+    styles
+\*---------------------------------------------*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+}
+
+html {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #002c3c;
+  background-color: #f4fcff;
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+h1 {
+  display: inline-block;
+  font-family: "Francois One", sans-serif;
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 0.8rem 0;
+  border-bottom: 4px solid #31d47d;
+}
+
+p {
+  margin: 0 0 2rem 0;
+}
+
+a {
+  color: #31d47d;
+  text-decoration: none;
+}
+a:focus, a:hover {
+  color: #24ae64;
+}
+
+.text-muted, footer {
+  color: #a9bec6;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-form {
+  padding: 0 20px;
+}
+
+.form {
+  display: block;
+  max-width: 400px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label,
+.form-input {
+  display: block;
+  width: 100%;
+}
+.form-area {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.form-label {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.form-label--required {
+  position: relative;
+}
+.form-label--required:before {
+  content: "*";
+  position: absolute;
+  left: -10px;
+  color: #f42866;
+}
+
+.form-input {
+  padding: 10px;
+  background-color: transparent;
+  border: 0;
+}
+.form-input:focus {
+  outline: none;
+  background-color: #f0f7f9;
+}
+.form-area {
+  padding: 50px;
+  background-color: transparent;
+  border: 0;
+}
+.form-area:focus {
+  outline: none;
+  background-color: #f0f7f9;
+}
+
+.form-footer {
+  text-align: right;
+}
+
+.form-error {
+  color: #f42866;
+  margin-top: 5px;
+}
+
+.button {
+  color: white;
+  white-space: nowrap;
+  background-color: #31d47d;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 2px;
+  transition: all 150ms ease-out;
+}
+.button:focus, .button:hover {
+  background-color: #219d5b;
+}
+
+.form-addon {
+  position: relative;
+  display: table;
+  width: 100%;
+  border: 1px solid #bcdae5;
+  background-color: #fff;
+  border-radius: 2px;
+}
+.form-addon .form-input,
+.form-addon .form-addon__addon {
+  display: table-cell;
+  vertical-align: middle;
+}
+.form-addon .form-input {
+  width: 100%;
+}
+.form-addon .form-addon__addon {
+  position: relative;
+  width: 40px;
+  text-align: center;
+}
+.form-addon .form-addon__addon:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 0;
+  height: calc(100% - 8px);
+  border-right: 1px solid #bcdae5;
+}
+
+.form-addon__icon {
+  position: absolute;
+  color: #31d47d;
+  font-size: 0.8rem;
+  line-height: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+
+.toaster {
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  right: 10px;
+}
+
+.toast {
+  color: #fff;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(-10px) rotateY(40deg);
+  transition: all 300ms ease;
+}
+.toast.toast--show {
+  transform: translateY(0) rotateY(0);
+  opacity: 1;
+}
+
+.toast--success {
+  background-color: #31d47d;
+}
+
+.toast--error {
+  background-color: #f42866;
+}
+
+footer {
+  margin-top: 10px;
+}
+
+/*---------------------------------------------*\
+    GentleForm related styles
+\*---------------------------------------------*/
+.form-addon .form-addon__icon {
+  transform: translateY(0);
+  opacity: 0;
+  transition: transform 150ms ease, opacity 150ms ease;
+}
+.form-addon.is-valid [class*=icon-valid], .form-addon.is-invalid [class*=icon-invalid] {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+.form-addon.is-invalid {
+  background-color: #fef4f7;
+  border-color: #f989ab;
+}
+.form-addon.is-invalid .form-addon__icon {
+  color: #f42866;
+}
+.form-addon.is-invalid .form-addon__addon:before {
+  border-color: #f989ab;
+}
+</style>
+<!-- <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
+    <script src="app.js"></script> -->
   </body>
 </html>
 

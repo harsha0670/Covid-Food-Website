@@ -62,12 +62,12 @@
             <tr class="bg-info">
               <th data-column="cname" data-order="desc">Caterer Name &#9660</th>
               <th data-column="name" data-order="desc">Contact Name &#9660</th>
-              <th data-column="pno" data-order="desc">Phone Number</th>
-              <th data-column="spno" data-order="desc">Secondary Contact No</th>
+              <th data-column="pno">Phone Number</th>
+              <th data-column="spno">Secondary Contact No</th>
               <th data-column="location" data-order="desc">Servicable location &#9660</th>
               <th data-column="price" data-order="desc">Cost &#9660</th>
-              <th data-column="frequency" data-order="desc">Frequency of Meals</th>
-              <th data-column="typefood" data-order="desc">Type of Food</th>
+              <th data-column="frequency">Frequency of Meals</th>
+              <th data-column="typefood">Type of Food</th>
             </tr>
             <tbody id="myTable">
               
@@ -116,14 +116,15 @@
         var column=$(this).data('column')
         var order=$(this).data('order')
         var text=$(this).html()
-        text=text.substring(0, text.length-1)
     
         if(order=='desc'){
+          text=text.substring(0, text.length-1)
           $(this).data('order',"asc")
           arr=arr.sort((a,b) => a[column]>b[column] ? 1 : -1)
           text+='&#9650'
     
-        }else{
+        }else if(order=='asc'){
+          text=text.substring(0, text.length-1)
           $(this).data('order',"desc")
           arr=arr.sort((a,b) => a[column]<b[column] ? 1 : -1)
           text+='&#9660'

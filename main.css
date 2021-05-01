@@ -16,7 +16,7 @@
   border-bottom: 2px solid #ccc;
   background: rgb(255, 255, 255);
   font-size: 18px;
-  border-radius: 3px;
+  border-radius: 10px;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -65,6 +65,9 @@
     display: block;
     width: 1000px;
   }
+  body > main > nav > ul.cd-nav__list.js-cd-nav__list > img{
+    display: none;
+  }
 }
 @media all and (min-width: 1000px) {
   .cd-content-wrapper{
@@ -109,8 +112,8 @@
     font-size: 40px;
     color: #FFFFFF;
     opacity: 0.7;
-    background-color: #4C0822;
-    border: 2px solid #4C0822;
+    background-color: #0fd149;
+    border: 2px solid #248008;
   
     webkit-transition:all .5s ease;
      moz-transition:all .5s ease;
@@ -120,7 +123,7 @@
   }
   .about-item:hover span{
     opacity: 1;	
-    border: 2px solid #CC0039;
+    border: 2px solid #058d17;
     font-size: 42px;
     -webkit-transform: scale(1.1,1.1) rotate(360deg) ;
     -moz-transform: scale(1.1,1.1) rotate(360deg) ;

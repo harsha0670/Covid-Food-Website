@@ -1,13 +1,249 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<title>Free Food</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <title>Caterers @ Bengaluru</title>
 </head>
-<body>
+<body style="overflow: hidden;">
+  <header class="cd-main-header js-cd-main-header">
+    <div class="cd-logo-wrapper">
+      <a class="cd-logo" style="color: white; font-weight: bold; font-size: 20px; margin-top: 5px; text-decoration: none; margin-left: 10px;"><p>Caterers Bengaluru</p></a>
+    </div>
+    
+    <div class="js-cd-search">
+   
+    </div>
+  
+    <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
+  
+    <ul class="cd-nav__list js-cd-nav__list" style="margin-top: 10px; display:none;">
+        <img src="assets/img/india.png" alt="logo" width="70%" height="90%">
+</ul>
+  </header> 
+  
+  <main class="cd-main-content">
+    <nav class="cd-side-nav js-cd-side-nav" style="zoom: 150%;">
+        <ul class="cd-side__list js-cd-side__list">
+          <li class="cd-side__label" style="font-size: 16px;"><span>Main</span></li>
+          <li class="cd-side__item cd-side__item--overview">
+            <a style="text-decoration: none;font-size: 11px;" href="index.html">Caterers</a>
+          </li>
+  
+          <li class="cd-side__item  cd-side__item--selected">
+            <a style="text-decoration: none;font-size: 11px;" href="form.html">Register</a>
+          </li>
+  
+          <li class="cd-side__label" style="font-size: 16px;"><span>Secondary</span></li>
+          <li class="cd-side__item cd-side__item--notifications">
+            <a style="text-decoration: none;font-size: 11px;" href="info.html">Information</a>
+          </li>
+      
+        </ul>
+      </nav>
+  
+    <div class="cd-content-wrapper" style="overflow: hidden;">
+      <p style="font-weight: bolder; font-size: 3rem; display: inline-block; line-height: 1.5; font-weight: 700;">Caterers List</p>
+      <p style="font-style: italic;">The below list contains the verified caterers providing food services in Bengaluru, India.</p>
+        
+        <hr>
+        <div class="search__container">
+            <input class="search__input" id="search-input" type="text" placeholder="location">
+          </div>
+      <br>
+      <div class="table-responsive">
+        <table class="table table-striped" style="width: 100%;">
+            <tr class="bg-info">
+              <th data-column="cname" data-order="desc">Caterer Name &#9660</th>
+              <th data-column="name" data-order="desc">Contact Name &#9660</th>
+              <th data-column="pno" data-order="desc">Phone Number</th>
+              <th data-column="spno" data-order="desc">Secondary Contact No</th>
+              <th data-column="location" data-order="desc">Servicable location &#9660</th>
+              <th data-column="price" data-order="desc">Cost &#9660</th>
+              <th data-column="frequency" data-order="desc">Frequency of Meals</th>
+              <th data-column="typefood" data-order="desc">Type of Food</th>
+            </tr>
+            <tbody id="myTable">
+              
+            </tbody>
+          </table>
+        </div>
+    </div> 
+  </main> 
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/menu-aim.js"></script>
+  <script src="assets/js/main.js"></script>
 
-<h1>CLick whichever you want</h1>
-<a href="form.html">Contact US</a>
-<a href="table.html">List of Contacts</a>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
+
+  <script>  
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBPWjd9Hcc_usr7ujjtc6edInV3XTf4VN0",
+      authDomain: "test-ec15e.firebaseapp.com",
+      projectId: "test-ec15e",
+      storageBucket: "test-ec15e.appspot.com",
+      messagingSenderId: "19273560209",
+      appId: "1:19273560209:web:906ab73a8ba343485c0f30"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var array;
+    
+    // Refernece contactInfo collections
+    let contactInfo = firebase.database().ref("infos");
+    
+    retriveInfo()
+    // Retrieve Data
+    
+    function retriveInfo(){
+      let ref=firebase.database().ref("infos");
+      ref.on("value",gotData);
+    }
+    
+    function gotData(data){
+      var info=data.val();
+      let keys=Object.keys(info);
+      arr = Object.values(info);
+      table(arr)
+      $('th').on('click',function(){
+        var column=$(this).data('column')
+        var order=$(this).data('order')
+        var text=$(this).html()
+        text=text.substring(0, text.length-1)
+    
+        if(order=='desc'){
+          $(this).data('order',"asc")
+          arr=arr.sort((a,b) => a[column]>b[column] ? 1 : -1)
+          text+='&#9650'
+    
+        }else{
+          $(this).data('order',"desc")
+          arr=arr.sort((a,b) => a[column]<b[column] ? 1 : -1)
+          text+='&#9660'
+        }
+        $(this).html(text)
+        table(arr)
+        
+      })
+      $('#search-input').on('keyup',function(){
+          var value=$(this).val()
+          console.log('Value :',value)
+          var data=searchTable(value,arr)
+          table(data)
+      })
+    }
+    
+    
+    
+    function searchTable(value,data){
+      var filteredData=[]
+      for(var i=0;i<data.length;i++){
+        value=value.toLowerCase()
+        var name=data[i].name.toLowerCase()
+        if(name.includes(value)){
+          filteredData.push(data[i])
+        }
+      }
+      return filteredData
+    }
+    
+    function table(arr){
+    
+      var table=document.getElementById('myTable')
+      table.innerHTML=''
+    
+      for(let i=0;i<arr.length;i++){
+    
+        let name=arr[i].name;
+        let email=arr[i].email;
+        let message=arr[i].message;
+      
+        // let infoResults=document.querySelector(".infoResults");
+    
+        var row=`<tr>
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${message}</td>
+                 </tr>`
+        table.innerHTML += row
+      }
+    
+    }
+    </script>
+  
+  
+  
+  <style>
+        
+      th{
+        color: rgb(20, 1, 1);
+      }
+  
+      .search__container {
+        padding-top: 6px;
+    }
+  
+  .search__title {
+        font-size: 21px;
+        font-weight: 300;
+        text-align: left;
+        color: #ff8b88;
+        padding-right: 800px;
+    }
+  
+  .search__input {
+        width: 20%;
+        padding: 12px 24px;
+  
+        background-color: transparent;
+        transition: transform 250ms ease-in-out;
+        font-size: 14px;
+        line-height: 18px;
+        
+        color: #575756;
+        background-color: transparent;
+  /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+  
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: 18px 18px;
+        background-position: 95% center;
+        border-radius: 50px;
+        border: 1px solid #575756;
+        transition: all 250ms ease-in-out;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+  
+  .search__input::placeholder {
+            color: rgba(87, 87, 86, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+  
+  .search__input:hover,
+        .search__input:focus {
+            padding: 12px 0;
+            outline: 0;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #575756;
+            border-radius: 0;
+            background-position: 100% center;
+        }
+    </style>
+
+
 
 </body>
 </html>
+
+
+
+

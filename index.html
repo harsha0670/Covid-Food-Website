@@ -28,8 +28,8 @@
 </ul>
   </header> 
   
-  <main class="cd-main-content">
-    <nav class="cd-side-nav js-cd-side-nav" style="zoom: 150%;">
+  <main class="cd-main-content" style="overflow: hidden;">
+    <nav class="cd-side-nav js-cd-side-nav" style="zoom: 150%; position: fixed; height: 100%;">
         <ul class="cd-side__list js-cd-side__list">
           <li class="cd-side__label" style="font-size: 16px;"><span>Main</span></li>
           <li class="cd-side__item cd-side__item--overview">
@@ -48,7 +48,7 @@
         <li class="cd-side__label" style="font-size: 12px;"><span>Designed & Developed by JM and SK</span></li>
       </nav>
   
-    <div class="cd-content-wrapper" style="overflow: hidden;">
+    <div class="content" style="overflow: hidden; padding-left: 5px; padding-right: 5px;margin-top: 20px;">
       <p style="font-weight: bolder; font-size: 3rem; display: inline-block; line-height: 1.5; font-weight: 700;">Caterers List</p>
       <p style="font-style: italic;">The below list contains the verified caterers providing food services in Bengaluru, India.</p>
         
@@ -59,18 +59,18 @@
       <br>
       <div class="table-responsive" style="overflow-y: auto;">
         <table id="caterer_table" class="table table-striped" style="width: 100%;">
-            <tr class="bg-info">
-              <th data-column="caterer_name" data-order="desc">Caterer Name &#9660</th>
-              <th data-column="contact_name" data-order="desc">Contact Name &#9660</th>
-              <th data-column="phone_number">Phone Number</th>
-              <th data-column="secondary_number">Secondary Contact No</th>
-              <th data-column="servicable_location" data-order="desc">Servicable location &#9660</th>
-              <th data-column="cost" data-order="desc">Cost &#9660</th>
-              <th data-column="no_of_meals">No of Meals</th>
-              <th data-column="frequency_of_meals">Frequency of Meals</th>
-              <th data-column="delivery_info">Delivery Info</th>
-              <th data-column="type_of_food">Type of Food</th>
-              <th data-column="remarks">Remarks</th>
+            <tr class="bg-info" style="background-color: hsl(210, 10%, 18.9%);">
+              <th data-column="caterer_name" style="color: white;" data-order="desc">Caterer Name &#9660</th>
+              <th data-column="contact_name" style="color: white;" data-order="desc">Contact Name &#9660</th>
+              <th data-column="phone_number" style="color: white;" >Phone Number</th>
+              <th data-column="secondary_number" style="color: white;" >Secondary Contact No</th>
+              <th data-column="servicable_location" style="color: white;"  data-order="desc">Servicable location &#9660</th>
+              <th data-column="cost" style="color: white;"  data-order="desc">Cost &#9660</th>
+              <th data-column="no_of_meals" style="color: white;" >No of Meals</th>
+              <th data-column="frequency_of_meals" style="color: white;">Frequency of Meals</th>
+              <th data-column="delivery_info" style="color: white;" >Delivery Info</th>
+              <th data-column="type_of_food" style="color: white;">Type of Food</th>
+              <th data-column="remarks" style="color: white;" >Remarks</th>
             </tr>
             <tbody id="myTable">
               

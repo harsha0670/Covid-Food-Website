@@ -70,8 +70,12 @@
   }
 }
 @media all and (min-width: 1000px) {
-  .cd-content-wrapper{
-    margin-left: 100px;
+  .content{
+    width: fit-content; 
+    position: relative; 
+    margin-left: 325px; 
+    margin-top: 50px; 
+    position: absolute;
   }
 
 }

@@ -57,7 +57,7 @@
             <input class="search__input" id="search-input" type="text" placeholder="location">
           </div>
       <br>
-      <div class="table-responsive">
+      <div class="table-responsive" style="overflow-y: auto;">
         <table class="table table-striped" style="width: 100%;">
             <tr class="bg-info">
               <th data-column="cname" data-order="desc">Caterer Name &#9660</th>
@@ -70,6 +70,7 @@
               <th data-column="frequency">Frequency of Meals</th>
               <th data-column="deliveryinfo">Delivery Info</th>
               <th data-column="typefood">Type of Food</th>
+              <th data-column="remarks">Remarks</th>
             </tr>
             <tbody id="myTable">
               
@@ -89,25 +90,23 @@
   <script>  
     // Your web app's Firebase configuration
     var firebaseConfig = {
-      apiKey: "AIzaSyBPWjd9Hcc_usr7ujjtc6edInV3XTf4VN0",
-      authDomain: "test-ec15e.firebaseapp.com",
-      projectId: "test-ec15e",
-      storageBucket: "test-ec15e.appspot.com",
-      messagingSenderId: "19273560209",
-      appId: "1:19273560209:web:906ab73a8ba343485c0f30"
+      apiKey: "AIzaSyDH7CjhM7cW0KXiZSIocU0XqqaENF2xNCU",
+      authDomain: "covidcatererdatabase.firebaseapp.com",
+      projectId: "covidcatererdatabase",
+      storageBucket: "covidcatererdatabase.appspot.com",
+      messagingSenderId: "415624003335",
+      appId: "1:415624003335:web:b1c75a0f68241959c9cfa2"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var array;
+
     
-    // Refernece contactInfo collections
-    let contactInfo = firebase.database().ref("infos");
     
     retriveInfo()
     // Retrieve Data
     
     function retriveInfo(){
-      let ref=firebase.database().ref("infos");
+      let ref=firebase.database().ref();
       ref.on("value",gotData);
     }
     
@@ -151,7 +150,7 @@
       var filteredData=[]
       for(var i=0;i<data.length;i++){
         value=value.toLowerCase()
-        var name=data[i].name.toLowerCase()
+        var name=data[i].servicable_location.toLowerCase()
         if(name.includes(value)){
           filteredData.push(data[i])
         }
@@ -160,22 +159,38 @@
     }
     
     function table(arr){
-    
+      console.log(arr)
       var table=document.getElementById('myTable')
       table.innerHTML=''
     
       for(let i=0;i<arr.length;i++){
     
-        let name=arr[i].name;
-        let email=arr[i].email;
-        let message=arr[i].message;
+        let cname=arr[i].caterer_name;
+        let name=arr[i].contact_name;
+        let cost=arr[i].cost;
+        let deliveryinfo=arr[i].delivery_info
+        let frequencyofmeals=arr[i].frequency_of_meals
+        let noofmeals=arr[i].no_of_meals
+        let pno=arr[i].phone_number
+        let remarks=arr[i].remarks
+        let location=arr[i].servicable_location
+        let typeoffood=arr[i].type_of_food
+        let sno=arr[i].secondary_number
       
         // let infoResults=document.querySelector(".infoResults");
     
         var row=`<tr>
+                    <td>${cname}</td>
                     <td>${name}</td>
-                    <td>${email}</td>
-                    <td>${message}</td>
+                    <td>${pno}</td>
+                    <td>${sno}</td>
+                    <td>${location}</td>
+                    <td>${cost}</td>
+                    <td>${noofmeals}</td>
+                    <td>${frequencyofmeals}</td>
+                    <td>${deliveryinfo}</td>
+                    <td>${typeoffood}</td>
+                    <td>${remarks}</td>
                  </tr>`
         table.innerHTML += row
       }

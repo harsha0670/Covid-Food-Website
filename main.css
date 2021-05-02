@@ -71,6 +71,16 @@
   body > main > nav > li{
     text-align: center;
   }
+
+  .cd-side-nav{
+    zoom: 150%; position: fixed; height: 100%; margin-top: -20px; 
+  }
+
+  #developers{
+    margin-left: -10px;
+  }
+
+
 }
 @media all and (min-width: 1000px) {
   .content{
@@ -96,14 +106,11 @@
     margin-top: 50px; 
   }
 
-  .body > main > nav{
-    zoom: 150%; position: fixed; height: 100%;
-  }
-
   .about{
     margin-left: 200px;
     
   }
+
 
 }
   

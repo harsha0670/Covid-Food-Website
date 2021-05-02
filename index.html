@@ -57,6 +57,9 @@
             <input class="search__input" id="search-input" type="text" placeholder="location">
           </div>
       <br>
+    <input type="checkbox" class="name" name="check" value="Free" />Free
+    <input type="checkbox" class="name" name="check" value="Non-Veg" />Veg
+<br><br>
       <div class="table-responsive" style="overflow-y: auto;">
         <table id="caterer_table" class="table table-striped" style="width: 100%;">
             <tr class="bg-info" style="background-color: hsl(210, 10%, 18.9%);">
@@ -65,7 +68,7 @@
               <th data-column="phone_number" style="color: white;" >Phone Number</th>
               <th data-column="secondary_number" style="color: white;" >Secondary Contact No</th>
               <th data-column="servicable_location" style="color: white;"  data-order="desc">Servicable location &#9660</th>
-              <th data-column="cost" style="color: white;"  data-order="desc">Cost &#9660</th>
+              <th name="cost" data-column="cost" style="color: white;"  data-order="desc">Cost &#9660</th>
               <th data-column="no_of_meals" style="color: white;" >No of Meals</th>
               <th data-column="frequency_of_meals" style="color: white;">Frequency of Meals</th>
               <th data-column="delivery_info" style="color: white;" >Delivery Info</th>
@@ -143,6 +146,56 @@
           var data=searchTable(value,arr)
           table(data)
       })
+      $(document).ready(function(){
+  $(".name").on("click", function() {
+  name_list = []
+  $("#myTable tr").hide()
+  var flag = 1
+  $("input:checkbox[name=check]:checked").each(function(){
+  		flag = 0;
+    	var value = $(this).val().toLowerCase();
+      if(value=='non-veg'){
+        value='veg';
+        console.log("veg only")
+        $("#myTable tr").filter(function() {
+
+            if($(this).text().toLowerCase().indexOf(value) > -1)
+        		$(this).show()
+    	});
+      value='non-veg'
+      $("#myTable tr").filter(function() {
+            if($(this).text().toLowerCase().indexOf(value) > -1)
+        		$(this).hide()
+    	});
+
+      }
+      else{
+        console.log("free only")
+      	$("#myTable tr").filter(function() {
+          console.log($(this).text().toLowerCase().indexOf(value))
+
+            if($(this).text().toLowerCase().indexOf(value) > -1)
+        		$(this).show()
+    	});
+    }
+ 	 });
+  //   $("input:checkbox[name=food]:checked").each(function(){
+  //     $("input:checkbox[name=cost]:checked").each(function(){
+  //       flag = 0;
+  //       console.log("crazzzzzy")
+  //   	var value = $(this).val().toLowerCase();
+  //     	$("#myTable tr").filter(function() {
+  //         console.log($(this).text().toLowerCase().indexOf("non-veg"))
+  //           if(($(this).text().toLowerCase().indexOf('free')>-1) && ($(this).text().toLowerCase().indexOf('non-veg') > -1))
+  //       		$(this).show()
+  //   	});
+  //     })
+ 	//  });
+    if(flag == 1)
+    	$("#myTable tr").show()
+  });
+});
+
     }
     
     

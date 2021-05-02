@@ -68,6 +68,9 @@
   body > main > nav > ul.cd-nav__list.js-cd-nav__list > img{
     display: none;
   }
+  body > main > nav > li{
+    text-align: center;
+  }
 }
 @media all and (min-width: 1000px) {
   .content{
@@ -79,6 +82,27 @@
   }
   body > main > div > section > div > div > div:nth-child(4){
     margin-left: 20%;
+  }
+ 
+  .cd-content-wrapper{
+    margin-left: 100px;
+  }
+
+  .form1{
+    justify-content: center;
+    align-items: center;
+    margin-left: 200%; 
+    width: 200%;
+    margin-top: 50px; 
+  }
+
+  .body > main > nav{
+    zoom: 150%; position: fixed; height: 100%;
+  }
+
+  .about{
+    margin-left: 200px;
+    
   }
 
 }

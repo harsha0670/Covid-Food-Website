@@ -58,13 +58,13 @@
             <input class="search__input" id="search-input" type="text" placeholder="location">
             
             <label class="switch" style="margin-left: 10px;" >
-              <input type="checkbox" class="name" name="check" value="Non-Veg" unchecked>
+              <input type="checkbox" class="name" name="check" value="Non-Veg" id="filterfood" unchecked>
               <span class="slider round"></span>
             </label>
             <label>Pure Veg</label>
 
             <label class="switch" style="margin-left: 5px;">
-              <input type="checkbox" class="name" name="check" value="Free" unchecked>
+              <input type="checkbox" class="name" name="check" value="Free" id="filtercost" unchecked>
               <span class="slider round"></span>
             </label>
             <label id="labeltoggle">Free</label>
@@ -75,7 +75,7 @@
 
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <p style="font-size: large;">This site aims to provide food delivery information to those suffering due to the pandemic. We have a table of data which can be searched by location and other parameters.<br><b>*** For people wanting to register and provide services in these dire times, please visit the registration tab. Thank you for your kindness !</b></p>
+                <p style="font-size: large;">This site aims to provide food delivery information to those suffering due to the pandemic. We have a table of data which can be searched by location and other parameters.<br><b>*** For people wanting to register and provide servies in these dire times, please visit the registration tab. Thank you for your kindness !</b></p>
               </div>
             </div>
 
@@ -147,7 +147,7 @@
         var column=$(this).data('column')
         var order=$(this).data('order')
         var text=$(this).html()
-        console.log("Column was clicked!",column,order)
+       
     
         if(order=='desc'){
           text=text.substring(0, text.length-1)
@@ -166,6 +166,12 @@
         
       })
       $('#search-input').on('keyup',function(){
+        if(document.getElementById("filterfood").checked){
+            document.getElementById("filterfood").click();
+          }
+          if(document.getElementById("filtercost").checked){
+            document.getElementById("filtercost").click();
+          }
           var value=$(this).val()
           console.log('Value :',value)
           var data=searchTable(value,arr)
@@ -181,7 +187,6 @@
     	var value = $(this).val().toLowerCase();
       if(value=='non-veg'){
         value='veg';
-        console.log("veg only")
         $("#myTable tr").filter(function() {
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
@@ -195,9 +200,8 @@
 
       }
       else{
-        console.log("free only")
       	$("#myTable tr").filter(function() {
-          console.log($(this).text().toLowerCase().indexOf(value))
+          
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
         		$(this).show()
@@ -238,7 +242,6 @@
     }
     
     function table(arr){
-      console.log(arr)
       var table=document.getElementById('myTable')
       table.innerHTML=''
     

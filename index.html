@@ -6,6 +6,7 @@
   <script>document.getElementsByTagName("html")[0].className += " js";</script>
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <title>Caterers @ Bengaluru</title>
@@ -13,15 +14,15 @@
 <body>
   <header class="cd-main-header js-cd-main-header" style="background-color: rgb(11, 88, 88);">
     <div class="cd-logo-wrapper">
-      <a class="cd-logo" style="color: white; font-weight: bold; font-size: 20px; margin-top: 5px; text-decoration: none; margin-left: 10px;"><p>Caterers Bengaluru</p></a>
+      <a class="cd-logo" style="color: white; font-weight: bold; font-size: 20px; margin-top: 10px; text-decoration: none; margin-left: 10px;"><p>Caterers Bengaluru</p></a>
     </div>
     
     <div class="js-cd-search">
    
     </div>
-  
+    <i class="fa fa-info-circle" id="myBtn" style="margin-left: 20px; font-size: x-large; color: blanchedalmond;"></i>  
     <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
-  
+
     <ul class="cd-nav__list js-cd-nav__list" style="margin-top: 10px;">
         <img src="assets/img/india.png" alt="logo" width="70%" height="90%">
 </ul>
@@ -56,17 +57,26 @@
             <input class="search__input" id="search-input" type="text" placeholder="location">
             
             <label class="switch" style="margin-left: 10px;" >
-              <input type="checkbox" class="name" name="check" value="Non-Veg" id="filterfood" unchecked>
+              <input type="checkbox" class="name" name="check" value="Non-Veg" unchecked>
               <span class="slider round"></span>
             </label>
             <label>Pure Veg</label>
 
             <label class="switch" style="margin-left: 5px;">
-              <input type="checkbox" class="name" name="check" value="Free" id="filtercost" unchecked>
+              <input type="checkbox" class="name" name="check" value="Free" unchecked>
               <span class="slider round"></span>
             </label>
             <label id="labeltoggle">Free</label>
-      
+            
+
+            <div id="myModal" class="modal">
+
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p style="font-size: large;">This site aims to provide food delivery information to those suffering due to the pandemic. We have a table of data which can be searched by location and other parameters.<br><b>*** For people wanting to register and provide servies in these dire times, please visit the registration tab. Thank you for your kindness !</b></p>
+              </div>
+            </div>
+
           </div>
       <br>
     <!-- <input type="checkbox" class="name" name="check" value="Free" />Free
@@ -135,6 +145,7 @@
         var column=$(this).data('column')
         var order=$(this).data('order')
         var text=$(this).html()
+        console.log("Column was clicked!",column,order)
     
         if(order=='desc'){
           text=text.substring(0, text.length-1)
@@ -153,13 +164,8 @@
         
       })
       $('#search-input').on('keyup',function(){
-          if(document.getElementById("filterfood").checked){
-            document.getElementById("filterfood").click();
-          }
-          if(document.getElementById("filtercost").checked){
-            document.getElementById("filtercost").click();
-          }
           var value=$(this).val()
+          console.log('Value :',value)
           var data=searchTable(value,arr)
           table(data)
       })
@@ -173,6 +179,7 @@
     	var value = $(this).val().toLowerCase();
       if(value=='non-veg'){
         value='veg';
+        console.log("veg only")
         $("#myTable tr").filter(function() {
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
@@ -186,7 +193,9 @@
 
       }
       else{
+        console.log("free only")
       	$("#myTable tr").filter(function() {
+          console.log($(this).text().toLowerCase().indexOf(value))
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
         		$(this).show()
@@ -227,6 +236,7 @@
     }
     
     function table(arr){
+      console.log(arr)
       var table=document.getElementById('myTable')
       table.innerHTML=''
     
@@ -261,8 +271,25 @@
                  </tr>`
         table.innerHTML += row
       }
+
+
     
     }
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+    span.onclick = function() {
+    modal.style.display = "none";
+}
+    window.onclick = function(event) {
+    if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
     // $(document).ready(function () {
     // $('#caterer_table').DataTable();

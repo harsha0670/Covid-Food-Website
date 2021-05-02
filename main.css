@@ -78,6 +78,7 @@
 
   #developers{
     margin-left: -10px;
+    margin-top: 0px;
   }
 
   .modal {
@@ -122,7 +123,16 @@
     
   }
 
+  #developers{
+    margin-top: 120%;
+  }
 
+}
+
+@media all and (min-width: 1300px) {
+  #developers{
+    margin-top: 135%;
+  }
 }
   
 @media all and (min-width: 1000px) {

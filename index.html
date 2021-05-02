@@ -47,7 +47,7 @@
           <li class="cd-side__item cd-side__item--has-children cd-side__item--bookmarks js-cd-item--has-children">
             <a style="text-decoration: none;font-size: 11px;">Contact Us</a>
             
-            <ul class="cd-side__sub-list">
+            <ul class="cd-side__sub-list" style="width: 100%;">
               <li class="cd-side__sub-item"><a style="text-decoration: none;font-size: 11px; color:white;" >Gautham: +91 9535077938</a></li>
               <li class="cd-side__sub-item"><a style="text-decoration: none;font-size: 11px;color: white;">Pavan: +91 9880810246</a></li>
             </ul>
@@ -102,7 +102,7 @@
               <th data-column="secondary_number" style="color: white;" >Secondary Contact No</th>
               <th data-column="servicable_location" style="color: white;"  data-order="desc">Servicable location &#9660</th>
               <th name="cost" data-column="cost" style="color: white;"  data-order="desc">Cost &#9660</th>
-              <th data-column="no_of_meals" style="color: white;" >No of Meals</th>
+              <th data-column="no_of_meals" style="color: white;">Current Fulfillment/Capacity</th>
               <th data-column="frequency_of_meals" style="color: white;">Frequency of Meals</th>
               <th data-column="delivery_info" style="color: white;" >Delivery Info</th>
               <th data-column="type_of_food" style="color: white;">Type of Food</th>
@@ -112,6 +112,9 @@
               
             </tbody>
           </table>
+          <div id="emptyFilter" style="text-align: center; color: rgb(15, 1, 1);">
+
+          </div>
         </div>
     </div> 
       <!-- Site footer -->
@@ -183,7 +186,17 @@
           var value=$(this).val()
           console.log('Value :',value)
           var data=searchTable(value,arr)
-          table(data)
+          var empty=document.getElementById('emptyFilter')
+          empty.innerHTML=''
+          if(data==''){
+            var emptyTable=document.getElementById('myTable')
+            emptyTable.innerHTML=''
+            var row=`<h4>NO DATA FOUND FOR THE SELECTED FILTERS</h4>`
+            empty.innerHTML=row
+            console.log("Empty")
+          }else{
+            table(data)
+          }
       })
       $(document).ready(function(){
   $(".name").on("click", function() {

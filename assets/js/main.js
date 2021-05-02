@@ -87,7 +87,7 @@
     };
 
     function expandSidebarItem() { // show dropdown of the selected sidebar item
-      Util.addClass(sidebar.getElementsByClassName('cd-side__item--selected')[0], 'cd-side__item--expanded');
+      Util.addClass(sidebar.getElementsByClassName('cd-side__item--users')[0], 'cd-side__item--expanded');
     };
 
     function checkSelected(mq) {

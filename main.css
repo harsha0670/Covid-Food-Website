@@ -124,7 +124,7 @@
   }
 
   #developers{
-    margin-top: 120%;
+    margin-top: 100%;
   }
 
 }
@@ -298,6 +298,55 @@
   cursor: pointer;
 }
 
+.cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card1{
+  margin: 30px auto;
+  width: 45%;
+  height: 275px;
+  border-radius: 5px;
+  box-shadow:  inset 0px -10px 0px  #045037, 5px 5px 30px  rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+  background: linear-gradient(rgb(255, 255, 255), rgb(184, 228, 218));
+}
+
+.card1 .card_title {
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-family: sans-serif;
+  width: 90%;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 12px;
+  height: 55px;
+}
+
+.title-white {
+  color: black;
+}
+
+.title-black {
+  color: black;
+}
+
+
+@media all and (max-width: 800px) { 
+  .cards-list {
+    flex-direction: column;
+  }
+  #cardList > div:nth-child(1){
+    background: linear-gradient(rgb(255, 255, 255), rgb(184, 228, 218));
+  }
+
+  }
+}
+
 
   
-}

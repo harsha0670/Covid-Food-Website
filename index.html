@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <script>document.getElementsByTagName("html")[0].className += " js";</script>
-  <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
   <title>Caterers @ Bengaluru</title>
 </head>
 <body>
@@ -57,7 +57,7 @@
       </nav>
   
     <div class="content" style="overflow: hidden; padding-left: 5px; padding-right: 5px;margin-top: 20px;">
-      <p style="font-weight: bolder; font-size: 3rem; display: inline-block; line-height: 1.5; font-weight: 700;">Caterers List</p>
+      <p style="font-weight: bolder; font-size: 1.5rem; display: inline-block; line-height: 1.5; font-weight: 700;">Caterers List</p>
       <p style="font-style: italic;">The below list contains the verified caterers providing food services in Bengaluru, India.</p>
       <p><b>DISCLAIMER :</b> <u>Number of meals</u> provided by the caterers are <u>subject to availability</u>, we will be updating the number and frequency of meals provided to the best of our knowledge.</p>
         
@@ -83,7 +83,7 @@
 
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <p style="font-size: large;">This site aims to provide food delivery information to those suffering due to the pandemic. We have a table of data which can be searched by location and other parameters.<br><b>*** For people wanting to register and provide servies in these dire times, please visit the registration tab. Thank you for your kindness !</b></p>
+                <p style="font-size: large;">This site aims to provide food delivery information to those suffering due to the pandemic. We have a table of data which can be searched by location and other parameters.<br><b>*** For people wanting to register and provide services in these dire times, please visit the registration tab. Thank you for your kindness !</b></p>
               </div>
             </div>
 
@@ -92,8 +92,7 @@
     <!-- <input type="checkbox" class="name" name="check" value="Free" />Free
     <input type="checkbox" class="name" name="check" value="Non-Veg" />Veg -->
 
-<br><br>
-      <div class="table-responsive" style="overflow-y: auto;">
+      <!-- <div class="table-responsive" style="overflow-y: auto;">
         <table id="caterer_table" class="table table-striped" style="width: 100%;">
             <tr class="bg-info" style="background-color: hsl(210, 10%, 18.9%);">
               <th data-column="caterer_name" style="color: white;" data-order="desc">Caterer Name &#9660</th>
@@ -102,7 +101,7 @@
               <th data-column="secondary_number" style="color: white;" >Secondary Contact No</th>
               <th data-column="servicable_location" style="color: white;"  data-order="desc">Servicable location &#9660</th>
               <th name="cost" data-column="cost" style="color: white;"  data-order="desc">Cost &#9660</th>
-              <th data-column="no_of_meals" style="color: white;">Current Fulfillment/Capacity</th>
+              <th data-column="no_of_meals" style="color: white;" >No of Meals</th>
               <th data-column="frequency_of_meals" style="color: white;">Frequency of Meals</th>
               <th data-column="delivery_info" style="color: white;" >Delivery Info</th>
               <th data-column="type_of_food" style="color: white;">Type of Food</th>
@@ -112,10 +111,14 @@
               
             </tbody>
           </table>
-          <div id="emptyFilter" style="text-align: center; color: rgb(15, 1, 1);">
+        </div> -->
 
-          </div>
-        </div>
+          
+      <div id="cardList" class="cards-list">
+
+      </div>
+      <div id="emptyFilter" style="text-align: center; color: rgb(15, 1, 1);"></div>
+
     </div> 
       <!-- Site footer -->
   </main> 
@@ -153,29 +156,9 @@
       var info=data.val();
       let keys=Object.keys(info);
       arr = Object.values(info);
+      console.log(arr);
       table(arr)
-      $('th').on('click',function(){
-        var column=$(this).data('column')
-        var order=$(this).data('order')
-        var text=$(this).html()
-       
-    
-        if(order=='desc'){
-          text=text.substring(0, text.length-1)
-          $(this).data('order',"asc")
-          arr=arr.sort((a,b) => a[column]>b[column] ? 1 : -1)
-          text+='&#9650'
-    
-        }else if(order=='asc'){
-          text=text.substring(0, text.length-1)
-          $(this).data('order',"desc")
-          arr=arr.sort((a,b) => a[column]<b[column] ? 1 : -1)
-          text+='&#9660'
-        }
-        $(this).html(text)
-        table(arr)
-        
-      })
+
       $('#search-input').on('keyup',function(){
         if(document.getElementById("filterfood").checked){
             document.getElementById("filterfood").click();
@@ -189,7 +172,7 @@
           var empty=document.getElementById('emptyFilter')
           empty.innerHTML=''
           if(data==''){
-            var emptyTable=document.getElementById('myTable')
+            var emptyTable=document.getElementById('cardList')
             emptyTable.innerHTML=''
             var row=`<h4>NO DATA FOUND FOR THE SELECTED FILTERS</h4>`
             empty.innerHTML=row
@@ -198,35 +181,39 @@
             table(data)
           }
       })
+      
       $(document).ready(function(){
-  $(".name").on("click", function() {
-  name_list = []
-  $("#myTable tr").hide()
-  var flag = 1
-  $("input:checkbox[name=check]:checked").each(function(){
-  		flag = 0;
-    	var value = $(this).val().toLowerCase();
-      if(value=='non-veg'){
-        value='veg';
-        $("#myTable tr").filter(function() {
+        $(".name").on("click", function() {
+        name_list = []
+        $("#cardList .card1").hide();
+        var flag = 1
+        $("input:checkbox[name=check]:checked").each(function(){
+  		  flag = 0;
+    	  var value = $(this).val().toLowerCase();
+        if(value=='non-veg'){
+          value='veg';
+          $("#cardList .card1").filter(function() {
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
-        		$(this).show()
+        		$(this).show();
     	});
+      
       value='non-veg'
-      $("#myTable tr").filter(function() {
+      $("#cardList .card1").filter(function() {
+            console.log($(this).text());
             if($(this).text().toLowerCase().indexOf(value) > -1)
         		$(this).hide()
     	});
 
       }
       else{
-      	$("#myTable tr").filter(function() {
+        $("#cardList .card1").filter(function() {
           
 
             if($(this).text().toLowerCase().indexOf(value) > -1)
-        		$(this).show()
-    	});
+        		$(this).show();
+    	})
+      
     }
  	 });
   //   $("input:checkbox[name=food]:checked").each(function(){
@@ -240,15 +227,15 @@
   //       		$(this).show()
   //   	});
   //     })
- 	//  });
+ //	 });
     if(flag == 1)
-    	$("#myTable tr").show()
+    	$("#cardList .card1").show()
   });
-});
-
+  
+      });
     }
     
-    
+          
     
     function searchTable(value,data){
       var filteredData=[]
@@ -263,7 +250,7 @@
     }
     
     function table(arr){
-      var table=document.getElementById('myTable')
+      var table=document.getElementsByClassName('cards-list')[0]
       table.innerHTML=''
     
       for(let i=0;i<arr.length;i++){
@@ -282,19 +269,38 @@
       
         // let infoResults=document.querySelector(".infoResults");
     
-        var row=`<tr>
-                    <td>${caterer_name}</td>
-                    <td>${contact_name}</td>
-                    <td>${phone_number}</td>
-                    <td>${secondary_number}</td>
-                    <td>${servicable_location}</td>
-                    <td>${cost}</td>
-                    <td>${no_of_meals}</td>
-                    <td>${frequency_of_meals}</td>
-                    <td>${delivery_info}</td>
-                    <td>${type_of_food}</td>
-                    <td>${remarks}</td>
-                 </tr>`
+        var row=` <div class="card1">
+                  <div class="card_title title-white">
+                  <p style="text-align:left;"><b>Caterer / Contact Name</b> : ${caterer_name} / ${contact_name}<br>
+                  <b>Phone Number :</b> ${phone_number}<br>
+                  <b>Secondary #  :</b> ${secondary_number}<br>
+                  <b>Servicable Locations :</b> ${servicable_location}<br>
+                  <b>Cost :</b> ${cost}<br>
+                  <b>Number of Meals :</b> ${no_of_meals}<br>
+                  <b>Frequency of Meals :</b> ${frequency_of_meals}<br>
+                  <b>Delivery Information :</b> ${delivery_info}<br>
+                  <b>Type of Food :</b> ${type_of_food}<br>
+                  <b>Remarks :</b> ${remarks}<br></p>
+                  </div>
+                  </div>`
+
+              
+
+                //   <tr>
+                //     <td>${caterer_name}</td>
+                //     <td>${contact_name}</td>
+                //     <td>${phone_number}</td>
+                //     <td>${secondary_number}</td>
+                //     <td>${servicable_location}</td>
+                //     <td>${cost}</td>
+                //     <td>${no_of_meals}</td>
+                //     <td>${frequency_of_meals}</td>
+                //     <td>${delivery_info}</td>
+                //     <td>${type_of_food}</td>
+                //     <td>${remarks}</td>
+                //  </tr>
+
+                 
         table.innerHTML += row
       }
 
@@ -326,12 +332,35 @@
   
   
   <style>
-        
-      th{
-        color: rgb(20, 1, 1);
-      }
+  @media all and (max-width: 1080px) { 
+  .cards-list {
+    flex-direction: column;
+  }
+  .card1 .card_title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-family: sans-serif;
+    width: 90%;
+    margin-left: 20px;
+    padding-top: 25px;
+    font-size: 12px;
+    height: 55px;
+
+}
+  .card1{
+    margin: 30px auto;
+    width: 95%;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow:  inset 0px -10px 0px  #045037, 5px 5px 30px  rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    background: linear-gradient(rgb(255, 255, 255), rgb(184, 228, 218));
+  }
+
+  }
   
-      .search__container {
+  .search__container {
         padding-top: 6px;
     }
   

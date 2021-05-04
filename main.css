@@ -309,7 +309,7 @@
 .card1{
   margin: 30px auto;
   width: 45%;
-  height: 275px;
+  height: 305px;
   border-radius: 5px;
   box-shadow:  inset 0px -10px 0px  #045037, 5px 5px 30px  rgba(0,0,0,0.25), -3px -3px 30px 7px rgba(0,0,0,0.22);
   cursor: pointer;
@@ -349,6 +349,10 @@
   #cardList > div:nth-child(1){
     background: linear-gradient(rgb(255, 255, 255), rgb(184, 228, 218));
   }
+
+  
+
+  
 
   }
 }
